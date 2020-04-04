@@ -1,0 +1,170 @@
+#MinesweeperPane-toolBar
+{
+	-fx-alignment: center;
+	-fx-spacing: 10;
+}
+
+#MinesweeperPane-widthField
+{
+	-fx-alignment: center;
+	-fx-pref-width: 35;
+	-fx-font-family: Courier New;
+	-fx-font-size: 16;
+	-fx-font-weight: bold;
+	-fx-padding: 5 5 5 5;
+}
+
+#MinesweeperPane-heightField
+{
+	-fx-alignment: center;
+	-fx-pref-width: 35;
+	-fx-font-family: Courier New;
+	-fx-font-size: 16;
+	-fx-font-weight: bold;
+	-fx-padding: 5 5 5 5;
+}
+
+#MinesweeperPane-numberOfMinesField
+{
+	-fx-alignment: center;
+	-fx-pref-width: 50;
+	-fx-font-family: Courier New;
+	-fx-font-size: 16;
+	-fx-font-weight: bold;
+	-fx-padding: 5 5 5 5;
+}
+
+#MinesweeperPane-newGameButton
+{
+	-fx-alignment: center;
+	-fx-font-family: Courier New;
+	-fx-font-size: 16;
+	-fx-font-weight: bold;
+	-fx-padding: 5 5 5 5;
+}
+
+#MinesweeperPane-bestTimesButton
+{
+	-fx-alignment: center;
+	-fx-font-family: Courier New;
+	-fx-font-size: 16;
+	-fx-font-weight: bold;
+	-fx-padding: 5 5 5 5;
+}
+
+#MinesweeperPane-time
+{
+	-fx-font-family: Courier New;
+	-fx-font-size: 20;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+	-fx-padding: 10 20 20 20;
+}
+
+#MinesweeperPane-numberOfMinesLeft
+{
+	-fx-font-family: Courier New;
+	-fx-font-size: 20;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+	-fx-padding: 10 0 20 0;
+}
+
+#MinesweeperPane-widthTooltip
+{
+	-fx-font-family: Courier New;
+	-fx-font-size: 20;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+	-fx-background-color: black;
+	-fx-padding: 10 10 10 10;
+}
+
+#MinesweeperPane-heightTooltip
+{
+	-fx-font-family: Courier New;
+	-fx-font-size: 20;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+	-fx-background-color: black;
+	-fx-padding: 10 10 10 10;
+}
+
+#MinesweeperPane-numberOfMinesTooltip
+{
+	-fx-font-family: Courier New;
+	-fx-font-size: 20;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+	-fx-background-color: black;
+	-fx-padding: 10 10 10 10;
+}
+
+#MinesweeperPane
+{
+	-fx-alignment: center;
+	-fx-background-image: url('file:res/background.png');
+	-fx-background-size: stretch;
+	-fx-background-position: center center;
+	-fx-background-repeat: stretch;
+	-fx-border-color: black;
+}
+
+#BestTimesPane
+{
+	-fx-alignment: center;
+	-fx-spacing: 10;
+	-fx-padding: 10 10 10 10;
+}
+
+#BestTimesPane-titleLabel
+{
+	-fx-alignment: center;
+	-fx-font-family: Courier New;
+	-fx-font-size: 16;
+	-fx-font-weight: bold;
+	-fx-padding: 5 5 5 5;
+}
+
+#BestTimesPane-gridPane
+{
+	-fx-alignment: center;
+}
+
+#BestTimesPane-numberHeader
+{
+	-fx-alignment: center;
+	-fx-font-family: Courier New;
+	-fx-font-size: 16;
+	-fx-font-weight: bold;
+	-fx-padding: 5 5 5 5;
+}
+
+#BestTimesPane-timeHeader
+{
+	-fx-alignment: center;
+	-fx-font-family: Courier New;
+	-fx-font-size: 16;
+	-fx-font-weight: bold;
+	-fx-padding: 5 5 5 5;
+}
+
+#BestTimesPane-positionLabels
+{
+	-fx-alignment: center;
+	-fx-font-family: Courier New;
+	-fx-font-size: 16;
+	-fx-font-weight: bold;
+	-fx-padding: 5 5 5 5;
+}
+
+#BestTimesPane-timeLabels
+{
+	-fx-alignment: center;
+	-fx-font-family: Courier New;
+	-fx-font-size: 16;
+	-fx-font-weight: bold;
+	-fx-padding: 5 5 5 5;
+}
+
+
