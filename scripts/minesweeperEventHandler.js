@@ -137,6 +137,9 @@ export function setupKeyboardEventListeners()
 export function setupUIEventListeners(mineField)
 {
   // Default to Expert Difficulty
+  document.getElementById(Ids.setupScreen.widthTextbox).valueAsNumber = DifficultySettings.expert.width;
+  document.getElementById(Ids.setupScreen.heightTextbox).valueAsNumber = DifficultySettings.expert.height;
+  document.getElementById(Ids.setupScreen.mineCountTextbox).valueAsNumber = DifficultySettings.expert.mineCount;
   document.getElementById(Ids.setupScreen.widthTextbox).disabled = true;
   document.getElementById(Ids.setupScreen.heightTextbox).disabled = true;
   document.getElementById(Ids.setupScreen.mineCountTextbox).disabled = true;

@@ -12,25 +12,36 @@
   <body>
     <div class="flexBoxColumn" style="align-items: center;">
       <div id="setupScreenId" class="setupScreen" style="padding-top: 5%;">
-        <div class="flexBoxRow">
-          Width: <input id="widthTextboxId" type="number" min="1" value="30" placeholder="W" style="width: 4em; text-align: center; font-size: 10px;">
+        <div class="flexBoxRow" style="justify-content: space-between;">
+          Width: <input id="widthTextboxId" type="number" min="1" placeholder="W" style="width: 4em; text-align: center; font-size: 20px; margin: 0px 10px;">
         </div>
-        <div class="flexBoxRow">
-          Height: <input id="heightTextboxId" type="number" min="1" value="16" placeholder="H" style="width: 4em; text-align: center; font-size: 10px;">
+        <div class="flexBoxRow" style="justify-content: space-between;">
+          Height: <input id="heightTextboxId" type="number" min="1" placeholder="H" style="width: 4em; text-align: center; font-size: 20px; margin: 0px 10px;">
         </div>
-        <div class="flexBoxRow">
-          Mine Count: <input id="mineCountTextboxId" type="number" min="1" value="99" placeholder="H" style="width: 4em; text-align: center; font-size: 10px;">
+        <div class="flexBoxRow" style="justify-content: space-between;">
+          Mine Count: <input id="mineCountTextboxId" type="number" min="1" placeholder="M" style="width: 4em; text-align: center; font-size: 20px; margin: 0px 10px;">
         </div>
-        <div>
-          <input type="radio" id="beginnerRadioId" name="difficulty" value="Beginner"><label for="beginnerRadioId">Beginner</label>
-          <br>
-          <input type="radio" id="intermediateRadioId" name="difficulty" value="Intermediate"><label for="intermediateRadioId">Intermediate</label>
-          <br>
-          <input type="radio" id="expertRadioId" name="difficulty" value="Expert"><label for="expertRadioId">Expert</label>
-          <br>
-          <input type="radio" id="customRadioId" name="difficulty" value="Custom"><label for="customRadioId">Custom</label>
+        <br>
+        <div class="flexBoxColumn" style="align-items: flex-start;">
+          <div>
+            <input type="radio" id="beginnerRadioId" name="difficulty" value="Beginner">
+            <label for="beginnerRadioId">Beginner</label>
+          </div>
+          <div>
+            <input type="radio" id="intermediateRadioId" name="difficulty" value="Intermediate">
+            <label for="intermediateRadioId">Intermediate</label>
+          </div>
+          <div>
+            <input type="radio" id="expertRadioId" name="difficulty" value="Expert">
+            <label for="expertRadioId">Expert</label>
+          </div>
+          <div>
+            <input type="radio" id="customRadioId" name="difficulty" value="Custom">
+            <label for="customRadioId">Custom</label>
+          </div>
         </div>
-        <button id="startButtonId" class="font-awesome-icons" title="Start">
+        <br>
+        <button id="startButtonId" class="font-awesome-icons" title="Start" style="width: 100%;">
           <i class="fa fa-play-circle"></i>
         </button>
       </div>
