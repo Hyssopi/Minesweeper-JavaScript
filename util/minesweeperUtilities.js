@@ -73,7 +73,9 @@ export function setMineField(mineField, width, height, mineCount)
 export function resetAndRedrawMineField(mineField)
 {
   resetMineField(mineField);
-  redrawMineField(mineField);
+
+  // Initialize the mine field UI
+  drawMineField(mineField);
 }
 
 function resetMineField(mineField)
@@ -101,7 +103,8 @@ function resetMineField(mineField)
   }
 }
 
-export function redrawMineField(mineField)
+
+function drawMineField(mineField)
 {
   let mineFieldDiv = document.getElementById(Ids.gameScreen.mineField);
   mineFieldDiv.innerHTML = '';
@@ -126,6 +129,20 @@ export function redrawMineField(mineField)
       newDivRow.appendChild(newDiv);
     }
     mineFieldDiv.appendChild(newDivRow);
+  }
+}
+
+export function redrawMineField(mineField)
+{
+  let mineFieldDiv = document.getElementById(Ids.gameScreen.mineField);
+  for (let y = 0; y < mineField.height; y++)
+  {
+    let divRow = mineFieldDiv.childNodes[y];
+    for (let x = 0; x < mineField.width; x++)
+    {
+      // Update the tile image based on the tile state
+      divRow.childNodes[x].firstChild.src = 'images/' + mineField.grid[y][x].state + '.png';
+    }
   }
 }
 
@@ -264,7 +281,8 @@ export function uncoverTile(mineField, x, y)
 
 export function uncoverArea(mineField, x, y)
 {
-  if (mineField.grid[y][x].state == TileState.COVERED)
+  if (mineField.grid[y][x].state == TileState.COVERED
+    || mineField.grid[y][x].state == TileState.FLAGGED)
   {
     return;
   }
@@ -282,8 +300,6 @@ export function uncoverArea(mineField, x, y)
     }
   }
   
-  console.error('numberOfFlagsAround: ' + numberOfFlagsAround);
-
   for (const enumDirectionProperty in Direction)
   {
     if (isValidTileCoordinate(mineField.width, mineField.height, x, y, Direction[enumDirectionProperty]))
