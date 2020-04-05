@@ -77,7 +77,7 @@ export const Ids =
     {
       resetButton: 'resetButtonId',
       infoLabel: 'infoLabelId',
-      flagCountLabel: 'flagCountLabelId',
+      minesRemainingLabel: 'minesRemainingLabelId',
       timerLabel: 'timerLabelId'
     },
     mineField: 'mineFieldId'

@@ -45,8 +45,7 @@ export function createDefaultTileImage(mineField, x, y)
 
       toggleFlagTile(mineField, x, y);
 
-      // TODO: Update flag count label on UI
-      //Ids.gameScreen.statusBar.flagCountLabel
+      updateStatusBarRemainingMines(mineField);
 
       redrawMineField(mineField);
     }, false);
@@ -73,6 +72,8 @@ export function setMineField(mineField, width, height, mineCount)
 export function resetAndRedrawMineField(mineField)
 {
   resetMineField(mineField);
+
+  updateStatusBarRemainingMines(mineField);
 
   // Initialize the mine field UI
   drawMineField(mineField);
@@ -324,6 +325,11 @@ export function toggleFlagTile(mineField, x, y)
     return;
   }
 
+  if (!mineField.firstClick)
+  {
+    return;
+  }
+
   if (mineField.grid[y][x].state == TileState.FLAGGED)
   {
     mineField.grid[y][x].state = TileState.COVERED;
@@ -350,9 +356,20 @@ export function isGridCleared(mineField)
   return true;
 }
 
-export function computeRemainingMines()
+export function getFlaggedCount(mineField)
 {
-  //
+  let flaggedCount = 0;
+  for (let y = 0; y < mineField.height; y++)
+  {
+    for (let x = 0; x < mineField.width; x++)
+    {
+      if (mineField.grid[y][x].state == TileState.FLAGGED)
+      {
+        ++flaggedCount;
+      }
+    }
+  }
+  return flaggedCount;
 }
 
 export function gameOver(mineField)
@@ -388,10 +405,11 @@ export function gameOver(mineField)
 }
 
 
-export function updateStatusBarRemainingMines()
+export function updateStatusBarRemainingMines(mineField)
 {
-  //numberOfMinesLeft.setText("Mines: " + field.computeRemainingMines() + "/" + field.getNumberOfMines());
-  document.getElementById(Ids.gameScreen.statusBar.flagCountLabel).innerHTML = '';
+  let minesRemaining = mineField.mineCount - getFlaggedCount(mineField);
+  minesRemaining = minesRemaining.toString().padStart(2, '0');
+  document.getElementById(Ids.gameScreen.statusBar.minesRemainingLabel).innerHTML = `${minesRemaining} <img src="images/flagged.png" width="20" height="20">`;
 }
 
 

@@ -87,10 +87,9 @@ img:hover
 {
   justify-content: space-between;
   align-items: center;
-  padding-right: 10px;
   margin-bottom: 10px;
-  border: red 1px solid;
-  background-color: green;
+  border: black 1px solid;
+  background-color: lightgrey;
 }
 
 .mineFieldContainer

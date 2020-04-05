@@ -31,17 +31,20 @@
           <input type="radio" id="customRadioId" name="difficulty" value="Custom"><label for="customRadioId">Custom</label>
         </div>
         <button id="startButtonId" class="font-awesome-icons" title="Start">
-          <i class="fa fa-file"></i>
+          <i class="fa fa-play-circle"></i>
         </button>
       </div>
       <div id="gameScreenId" class="gameScreen" hidden>
         <div class="flexBoxRow statusBar">
           <button id="resetButtonId" class="font-awesome-icons" title="Reset">
-            <i class="fa fa-undo-alt"></i>
+            <i class="fa fa-sync-alt"></i>
           </button>
-          <div id="infoLabelId">Info Label</div>
-          <div id="flagCountLabelId">97 F</div>
-          <div id="timerLabelId">0.00</div>
+          <div class="flexBoxRow" style="align-items: center;">
+            <div id="infoLabelId" style="padding: 0px 10px;">Info Label</div>
+            <img src="images/mine.png" width="20" height="20">
+          </div>
+          <div id="minesRemainingLabelId" style="padding: 0px 10px;">Mines Remaining</div>
+          <div id="timerLabelId" style="padding: 0px 10px;">0.00</div>
         </div>
         <div id="mineFieldId" class="mineFieldContainer"></div>
       </div>

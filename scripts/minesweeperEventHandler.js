@@ -192,7 +192,7 @@ export function setupUIEventListeners(mineField)
       
       let difficultySelected = document.querySelector('input[name="difficulty"]:checked').value;
 
-      document.getElementById(Ids.gameScreen.statusBar.infoLabel).innerHTML = `${difficultySelected}: ${width} W x ${height} H, ${mineCount} M`;
+      document.getElementById(Ids.gameScreen.statusBar.infoLabel).innerHTML = `${difficultySelected}: ${width} <i class="fa fa-arrows-alt-h"></i> , ${height} <i class="fa fa-arrows-alt-v"></i> , ${mineCount}`;
 
       // TODO: Check that mineCount is within width/height
 
