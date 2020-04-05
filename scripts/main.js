@@ -109,4 +109,13 @@ function setup(mineField)
   minesweeperEventHandler.setupKeyboardEventListeners();
   
   minesweeperEventHandler.setupUIEventListeners(mineField);
+
+  let interval = setInterval(function()
+  {
+    if (mineField.startTime != null && !mineField.gameOver)
+    {
+      let timeDifferenceInSeconds = (new Date() - mineField.startTime) / 1000;
+      document.getElementById(Ids.gameScreen.statusBar.timerLabel).innerHTML = timeDifferenceInSeconds.toFixed(2);
+    }
+  }, 1000);
 }

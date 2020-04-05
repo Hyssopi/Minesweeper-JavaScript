@@ -101,6 +101,9 @@ function resetMineField(mineField)
       mineField.grid[y].push(tile);
     }
   }
+
+  // TODO: Move this to a UI specific function?
+  document.getElementById(Ids.gameScreen.statusBar.timerLabel).innerHTML = "0.00";
 }
 
 
@@ -273,8 +276,8 @@ export function uncoverTile(mineField, x, y)
 
   if (isGridCleared(mineField) && !mineField.gameOver)
   {
-    // TODO: End timer
     console.log('Game cleared, GAME WON');
+
     gameOver(mineField);
   }
 }
@@ -354,6 +357,10 @@ export function computeRemainingMines()
 
 export function gameOver(mineField)
 {
+  // TODO: End timer
+  let timeDifferenceInSeconds = (new Date() - mineField.startTime) / 1000;
+  document.getElementById(Ids.gameScreen.statusBar.timerLabel).innerHTML = timeDifferenceInSeconds.toFixed(2);
+
   mineField.gameOver = true;
   for (let y = 0; y < mineField.height; y++)
   {
