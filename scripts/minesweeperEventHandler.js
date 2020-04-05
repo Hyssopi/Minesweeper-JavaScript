@@ -190,6 +190,10 @@ export function setupUIEventListeners(mineField)
       let height = document.getElementById(Ids.setupScreen.heightTextbox).valueAsNumber;
       let mineCount = document.getElementById(Ids.setupScreen.mineCountTextbox).valueAsNumber;
       
+      let difficultySelected = document.querySelector('input[name="difficulty"]:checked').value;
+
+      document.getElementById(Ids.gameScreen.statusBar.infoLabel).innerHTML = `${difficultySelected}: ${width} W x ${height} H, ${mineCount} M`;
+
       // TODO: Check that mineCount is within width/height
 
       document.getElementById(Ids.setupScreen.id).hidden = true;

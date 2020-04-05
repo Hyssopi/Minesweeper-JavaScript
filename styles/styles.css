@@ -2,6 +2,7 @@
 body
 {
   font-family: Times New Roman, Liberation Serif, serif;
+  font-size: 32px;
   background: #EEEEEE;
   text-align: center;
 }
@@ -66,6 +67,53 @@ img:hover
   display: flex;
   flex-direction: row;
 }
+
+
+
+
+
+
+
+
+.setupScreen
+{
+}
+
+.gameScreen
+{
+}
+
+.statusBar
+{
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+  margin-bottom: 10px;
+  border: red 1px solid;
+  background-color: green;
+}
+
+.mineFieldContainer
+{
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .containerColumn
 {

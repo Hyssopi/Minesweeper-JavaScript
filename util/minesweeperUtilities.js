@@ -388,6 +388,11 @@ export function gameOver(mineField)
 }
 
 
+export function updateStatusBarRemainingMines()
+{
+  //numberOfMinesLeft.setText("Mines: " + field.computeRemainingMines() + "/" + field.getNumberOfMines());
+  document.getElementById(Ids.gameScreen.statusBar.flagCountLabel).innerHTML = '';
+}
 
 
 
