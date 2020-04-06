@@ -2,7 +2,7 @@
 import * as minesweeperEventHandler from './minesweeperEventHandler.js';
 
 
-export const DEFAULT_TILE_IMAGE_DIRECTORY = 'images';
+export const DEFAULT_TILE_IMAGE_DIRECTORY = 'images/tiles';
 
 // The value is also the tile filename
 export const TileState =

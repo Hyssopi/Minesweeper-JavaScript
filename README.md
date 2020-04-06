@@ -1,10 +1,10 @@
-# Minesweeper
-Minesweeper description.
+# Minesweeper-JavaScript
+Standard Minesweeper game.
 
-![splash](help/images/main.png)
+![splash](images/splash.png)
 
 ## GitHub Pages
-https://hyssopi.github.io/temp8/
+https://hyssopi.github.io/Minesweeper-JavaScript
 
 ## Prerequisites
 (None)
