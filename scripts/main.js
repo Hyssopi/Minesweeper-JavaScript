@@ -1,8 +1,7 @@
 
 import * as minesweeperEventHandler from './minesweeperEventHandler.js';
-import * as minesweeperUtilities from '../util/minesweeperUtilities.js';
 
-// Also the filename of the tile images
+// Also the value is filename of the tile images
 export const TileState =
 {
   'COVERED': 'covered',

@@ -1,7 +1,7 @@
 
 import * as utilities from './utilities.js';
 
-import {TileState, Direction, DifficultySettings, Ids} from '../scripts/main.js';
+import {TileState, Direction, Ids} from '../scripts/main.js';
 
 
 
@@ -19,8 +19,6 @@ export function createDefaultTileImage(mineField, x, y)
         // Left mouse click
         uncoverArea(mineField, x, y);
         uncoverTile(mineField, x, y);
-
-        console.log(mineField);
       }
       if (event.button === 1)
       {
@@ -28,12 +26,9 @@ export function createDefaultTileImage(mineField, x, y)
         uncoverArea(mineField, x, y);
       }
       
+      //console.log(mineField);
+      
       redrawMineField(mineField);
-
-      if (mineField.gameOver)
-      {
-        // Stop timer
-      }
     }, false);
   
   tileImage.addEventListener('contextmenu',
@@ -57,7 +52,7 @@ export function createDefaultTileImage(mineField, x, y)
       event.preventDefault();
     }, false);
   
-  tileImage.src = 'images/covered.png';
+  tileImage.src = 'images/' + TileState.COVERED + '.png';
 
   return tileImage;
 }
@@ -72,6 +67,8 @@ export function setMineField(mineField, width, height, mineCount)
 export function resetAndRedrawMineField(mineField)
 {
   resetMineField(mineField);
+
+  document.getElementById(Ids.gameScreen.statusBar.timerLabel).innerHTML = "0.00";
 
   updateStatusBarRemainingMines(mineField);
 
@@ -102,9 +99,6 @@ function resetMineField(mineField)
       mineField.grid[y].push(tile);
     }
   }
-
-  // TODO: Move this to a UI specific function?
-  document.getElementById(Ids.gameScreen.statusBar.timerLabel).innerHTML = "0.00";
 }
 
 
@@ -229,7 +223,6 @@ export function uncoverTile(mineField, x, y)
   {
     gameOver(mineField);
     mineField.grid[y][x].state = TileState.HIT_MINE;
-    redrawMineField(mineField);
     return;
   }
 
@@ -277,8 +270,7 @@ export function uncoverTile(mineField, x, y)
 
   if (isGridCleared(mineField) && !mineField.gameOver)
   {
-    console.log('Game cleared, GAME WON');
-
+    console.log('Grid cleared. Game won.');
     gameOver(mineField);
   }
 }
@@ -346,8 +338,7 @@ export function isGridCleared(mineField)
   {
     for (let x = 0; x < mineField.width; x++)
     {
-      if (mineField.grid[y][x].state == TileState.COVERED
-        && !mineField.grid[y][x].isMine)
+      if (mineField.grid[y][x].state == TileState.COVERED && !mineField.grid[y][x].isMine)
       {
         return false;
       }
@@ -374,29 +365,28 @@ export function getFlaggedCount(mineField)
 
 export function gameOver(mineField)
 {
-  // TODO: End timer
   let timeDifferenceInSeconds = (new Date() - mineField.startTime) / 1000;
   document.getElementById(Ids.gameScreen.statusBar.timerLabel).innerHTML = timeDifferenceInSeconds.toFixed(2);
 
   mineField.gameOver = true;
+
+  let isGridClearedTemp = isGridCleared(mineField);
   for (let y = 0; y < mineField.height; y++)
   {
     for (let x = 0; x < mineField.width; x++)
     {
-      if (isGridCleared(mineField) && mineField.grid[y][x].isMine)
+      if (isGridClearedTemp && mineField.grid[y][x].isMine)
       {
         mineField.grid[y][x].state = TileState.FLAGGED;
-        continue;
       }
-      if (mineField.grid[y][x].state == TileState.FLAGGED)
+      else if (mineField.grid[y][x].state == TileState.FLAGGED)
       {
         if (!mineField.grid[y][x].isMine)
         {
           mineField.grid[y][x].state = TileState.WRONG_MINE;
         }
-        continue;
       }
-      if (mineField.grid[y][x].isMine)
+      else if (mineField.grid[y][x].isMine)
       {
         mineField.grid[y][x].state = TileState.MINE;
       }
@@ -409,7 +399,7 @@ export function updateStatusBarRemainingMines(mineField)
 {
   let minesRemaining = mineField.mineCount - getFlaggedCount(mineField);
   minesRemaining = minesRemaining.toString().padStart(2, '0');
-  document.getElementById(Ids.gameScreen.statusBar.minesRemainingLabel).innerHTML = `${minesRemaining} <img src="images/flagged.png" width="20" height="20">`;
+  document.getElementById(Ids.gameScreen.statusBar.minesRemainingLabel).innerHTML = `${minesRemaining} <img src="images/${TileState.FLAGGED}.png" width="20" height="20">`;
 }
 
 
@@ -508,45 +498,4 @@ export function isValidTileCoordinate(width, height, x, y, direction = null)
 
   return modifiedY >= 0 && modifiedY < height
     && modifiedX >= 0 && modifiedX < width;
-}
-
-
-
-/**
- * Print debug information to console.
- * 
- * @param tileMapEditorData Contains the data used by the editor
- */
-export function printDebug(tileMapEditorData)
-{
-  let tileLookup = tileMapEditorData.tileLookup;
-  let layeredTileHashesDisplay = tileMapEditorData.layeredTileHashesDisplay;
-  let cursor = tileMapEditorData.cursor;
-  let userActionHistory = tileMapEditorData.userActionHistory;
-  
-  console.log('\n\n');
-  console.log('%c*****START DEBUG PRINT*****', 'background: black; color: white;');
-  
-  console.info('layeredTileHashesDisplay:');
-  console.table(layeredTileHashesDisplay);
-  
-  console.info('mapWidth: ' + tileMapEditorData.mapWidth + '\n');
-  console.info('mapHeight: ' + tileMapEditorData.mapHeight + '\n');
-  
-  console.info('cursor:');
-  console.log(cursor);
-  console.log('\n');
-  
-  console.info('layeredTileHashesDisplay.map[' + cursor.tileY + '][' + cursor.tileX + ']:');
-  console.log(layeredTileHashesDisplay.map[cursor.tileY][cursor.tileX]);
-  console.log('\n');
-  
-  console.info('getTileNeighborSum(...): ' + getTileNeighborSum(tileLookup, layeredTileHashesDisplay.map[cursor.tileY][cursor.tileX]) + '\n');
-  
-  console.info('userActionHistory:');
-  console.log(userActionHistory);
-  console.log('\n');
-  
-  console.log('%c*****END DEBUG PRINT*****', 'background: black; color: white;');
-  console.log('\n\n');
 }

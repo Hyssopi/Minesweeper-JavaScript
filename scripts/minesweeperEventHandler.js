@@ -1,86 +1,7 @@
 
-import * as utilities from '../util/utilities.js';
 import * as minesweeperUtilities from '../util/minesweeperUtilities.js';
 
-import {DifficultySettings, Ids} from './main.js';
-
-
-/**
- * Setup mouse event listeners.
- * 
- * @param tileMapEditorData Contains the data used by the editor
- */
-/*
-export function setupMouseEventListeners(tileMapEditorData)
-{
-  let canvas = tileMapEditorData.canvas;
-  let context = canvas.getContext('2d');
-  
-  let lastX = canvas.width / 2;
-  let lastY = canvas.height / 2;
-  let dragStart;
-  let dragged;
-  
-  let zoom = function(delta)
-  {
-    let point = context.transformedPoint(lastX, lastY);
-    context.translate(point.x, point.y);
-    let factor = Math.pow(SCALE_FACTOR, delta);
-    context.scale(factor, factor);
-    context.translate(-point.x, -point.y);
-    
-    tileMapEditorUtilities.redrawMap(tileMapEditorData);
-  };
-  
-  let handleScroll = function(event)
-  {
-    let delta = event.wheelDelta ? event.wheelDelta / 40 : event.detail ? -event.detail : 0;
-    if (delta)
-    {
-      zoom(delta);
-    }
-    return event.preventDefault() && false;
-  };
-  
-  canvas.addEventListener('DOMMouseScroll', handleScroll, false);
-  canvas.addEventListener('mousewheel', handleScroll, false);
-  
-  canvas.addEventListener('mousedown', function(event)
-  {
-    document.body.style.mozUserSelect = 'none';
-    document.body.style.webkitUserSelect = 'none';
-    document.body.style.userSelect = 'none';
-    lastX = event.offsetX || (event.pageX - canvas.offsetLeft);
-    lastY = event.offsetY || (event.pageY - canvas.offsetTop);
-    dragStart = context.transformedPoint(lastX, lastY);
-    dragged = false;
-  }, false);
-  
-  canvas.addEventListener('mousemove', function(event)
-  {
-    lastX = event.offsetX || (event.pageX - canvas.offsetLeft);
-    lastY = event.offsetY || (event.pageY - canvas.offsetTop);
-    dragged = true;
-    if (dragStart)
-    {
-      let point = context.transformedPoint(lastX, lastY);
-      context.translate(point.x - dragStart.x, point.y - dragStart.y);
-      
-      tileMapEditorUtilities.redrawMap(tileMapEditorData);
-    }
-  }, false);
-  
-  canvas.addEventListener('mouseup', function(event)
-  {
-    dragStart = null;
-  }, false);
-  
-  canvas.addEventListener('mouseout', function(event)
-  {
-    dragStart = null;
-  }, false);
-}
-*/
+import {TileState, DifficultySettings, Ids} from './main.js';
 
 /**
  * Prevent non-numerical event response.
@@ -195,7 +116,7 @@ export function setupUIEventListeners(mineField)
       
       let difficultySelected = document.querySelector('input[name="difficulty"]:checked').value;
 
-      document.getElementById(Ids.gameScreen.statusBar.infoLabel).innerHTML = `${difficultySelected}: ${width} <i class="fa fa-arrows-alt-h"></i> , ${height} <i class="fa fa-arrows-alt-v"></i> , ${mineCount}`;
+      document.getElementById(Ids.gameScreen.statusBar.infoLabel).innerHTML = `${difficultySelected}: ${width} <i class="fa fa-arrows-alt-h"></i> , ${height} <i class="fa fa-arrows-alt-v"></i> , ${mineCount} <img src="images/${TileState.MINE}.png" width="20" height="20">`;
 
       // TODO: Check that mineCount is within width/height
 
