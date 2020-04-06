@@ -1,7 +1,10 @@
 
 import * as minesweeperEventHandler from './minesweeperEventHandler.js';
 
-// Also the value is filename of the tile images
+
+export const DEFAULT_TILE_IMAGE_DIRECTORY = 'images';
+
+// The value is also the tile filename
 export const TileState =
 {
   'COVERED': 'covered',
@@ -98,7 +101,9 @@ setup(mineField);
 
 
 /**
- * TODO
+ * Setup.
+ * 
+ * @param mineField Contains mine field data
  */
 function setup(mineField)
 {
@@ -109,6 +114,7 @@ function setup(mineField)
   
   minesweeperEventHandler.setupUIEventListeners(mineField);
 
+  // Setup to update the timer
   let interval = setInterval(function()
   {
     if (mineField.startTime != null && !mineField.gameOver)

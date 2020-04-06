@@ -1,7 +1,8 @@
 
 import * as minesweeperUtilities from '../util/minesweeperUtilities.js';
 
-import {TileState, DifficultySettings, Ids} from './main.js';
+import {DEFAULT_TILE_IMAGE_DIRECTORY, TileState, DifficultySettings, Ids} from './main.js';
+
 
 /**
  * Prevent non-numerical event response.
@@ -40,8 +41,7 @@ export function setupKeyboardEventListeners()
   // Prevent Ctrl + W from closing the window/tab
   window.onbeforeunload = function(event)
   {
-    // TODO: Temporarily disable during development
-    //event.preventDefault();
+    event.preventDefault();
   };
 
   // Prevent non-numerical inputs for inputs
@@ -58,53 +58,31 @@ export function setupKeyboardEventListeners()
 export function setupUIEventListeners(mineField)
 {
   // Default to Expert Difficulty
-  document.getElementById(Ids.setupScreen.widthTextbox).valueAsNumber = DifficultySettings.expert.width;
-  document.getElementById(Ids.setupScreen.heightTextbox).valueAsNumber = DifficultySettings.expert.height;
-  document.getElementById(Ids.setupScreen.mineCountTextbox).valueAsNumber = DifficultySettings.expert.mineCount;
-  document.getElementById(Ids.setupScreen.widthTextbox).disabled = true;
-  document.getElementById(Ids.setupScreen.heightTextbox).disabled = true;
-  document.getElementById(Ids.setupScreen.mineCountTextbox).disabled = true;
   document.getElementById(Ids.setupScreen.expertRadio).checked = true;
+  switchDifficulty(DifficultySettings.expert);
 
   document.getElementById(Ids.setupScreen.beginnerRadio).addEventListener('change',
     function()
     {
-      document.getElementById(Ids.setupScreen.widthTextbox).valueAsNumber = DifficultySettings.beginner.width;
-      document.getElementById(Ids.setupScreen.heightTextbox).valueAsNumber = DifficultySettings.beginner.height;
-      document.getElementById(Ids.setupScreen.mineCountTextbox).valueAsNumber = DifficultySettings.beginner.mineCount;
-      document.getElementById(Ids.setupScreen.widthTextbox).disabled = true;
-      document.getElementById(Ids.setupScreen.heightTextbox).disabled = true;
-      document.getElementById(Ids.setupScreen.mineCountTextbox).disabled = true;
+      switchDifficulty(DifficultySettings.beginner);
     });
   
   document.getElementById(Ids.setupScreen.intermediateRadio).addEventListener('change',
     function()
     {
-      document.getElementById(Ids.setupScreen.widthTextbox).valueAsNumber = DifficultySettings.intermediate.width;
-      document.getElementById(Ids.setupScreen.heightTextbox).valueAsNumber = DifficultySettings.intermediate.height;
-      document.getElementById(Ids.setupScreen.mineCountTextbox).valueAsNumber = DifficultySettings.intermediate.mineCount;
-      document.getElementById(Ids.setupScreen.widthTextbox).disabled = true;
-      document.getElementById(Ids.setupScreen.heightTextbox).disabled = true;
-      document.getElementById(Ids.setupScreen.mineCountTextbox).disabled = true;
+      switchDifficulty(DifficultySettings.intermediate);
     });
   
   document.getElementById(Ids.setupScreen.expertRadio).addEventListener('change',
     function()
     {
-      document.getElementById(Ids.setupScreen.widthTextbox).valueAsNumber = DifficultySettings.expert.width;
-      document.getElementById(Ids.setupScreen.heightTextbox).valueAsNumber = DifficultySettings.expert.height;
-      document.getElementById(Ids.setupScreen.mineCountTextbox).valueAsNumber = DifficultySettings.expert.mineCount;
-      document.getElementById(Ids.setupScreen.widthTextbox).disabled = true;
-      document.getElementById(Ids.setupScreen.heightTextbox).disabled = true;
-      document.getElementById(Ids.setupScreen.mineCountTextbox).disabled = true;
+      switchDifficulty(DifficultySettings.expert);
     });
   
   document.getElementById(Ids.setupScreen.customRadio).addEventListener('change',
     function()
     {
-      document.getElementById(Ids.setupScreen.widthTextbox).disabled = false;
-      document.getElementById(Ids.setupScreen.heightTextbox).disabled = false;
-      document.getElementById(Ids.setupScreen.mineCountTextbox).disabled = false;
+      switchDifficulty(null);
     });
   
   document.getElementById(Ids.setupScreen.startButton).addEventListener('click',
@@ -124,12 +102,12 @@ export function setupUIEventListeners(mineField)
 
       let difficultySelected = document.querySelector('input[name="difficulty"]:checked').value;
 
-      document.getElementById(Ids.gameScreen.statusBar.infoLabel).innerHTML = `${difficultySelected}: ${width} <i class="fa fa-arrows-alt-h"></i> , ${height} <i class="fa fa-arrows-alt-v"></i> , ${mineCount} <img src="images/${TileState.MINE}.png" width="20" height="20">`;
+      document.getElementById(Ids.gameScreen.statusBar.infoLabel).innerHTML = `${difficultySelected}: ${width} <i class="fa fa-arrows-alt-h"></i> , ${height} <i class="fa fa-arrows-alt-v"></i> , ${mineCount} <img src="${DEFAULT_TILE_IMAGE_DIRECTORY}/${TileState.MINE}.png" width="20" height="20">`;
+
+      document.getElementById(Ids.gameScreen.statusBar.timerLabel).innerHTML = "0.00";
 
       document.getElementById(Ids.setupScreen.id).hidden = true;
       document.getElementById(Ids.gameScreen.id).hidden = false;
-
-      document.getElementById(Ids.gameScreen.statusBar.timerLabel).innerHTML = "0.00";
       
       minesweeperUtilities.setMineField(mineField, width, height, mineCount);
       minesweeperUtilities.resetAndRedrawMineField(mineField);
@@ -147,4 +125,30 @@ export function setupUIEventListeners(mineField)
       minesweeperUtilities.setMineField(mineField, width, height, mineCount);
       minesweeperUtilities.resetAndRedrawMineField(mineField);
     });
+}
+
+/**
+ * Update the Setup Screen UI elements based on the difficulty.
+ * 
+ * @param difficultySetting DifficultySettings enum
+ */
+function switchDifficulty(difficultySetting)
+{
+  if (JSON.stringify(difficultySetting) === JSON.stringify(DifficultySettings.beginner)
+    || JSON.stringify(difficultySetting) === JSON.stringify(DifficultySettings.intermediate)
+    || JSON.stringify(difficultySetting) === JSON.stringify(DifficultySettings.expert))
+  {
+    document.getElementById(Ids.setupScreen.widthTextbox).valueAsNumber = difficultySetting.width;
+    document.getElementById(Ids.setupScreen.heightTextbox).valueAsNumber = difficultySetting.height;
+    document.getElementById(Ids.setupScreen.mineCountTextbox).valueAsNumber = difficultySetting.mineCount;
+    document.getElementById(Ids.setupScreen.widthTextbox).disabled = true;
+    document.getElementById(Ids.setupScreen.heightTextbox).disabled = true;
+    document.getElementById(Ids.setupScreen.mineCountTextbox).disabled = true;
+  }
+  else
+  {
+    document.getElementById(Ids.setupScreen.widthTextbox).disabled = false;
+    document.getElementById(Ids.setupScreen.heightTextbox).disabled = false;
+    document.getElementById(Ids.setupScreen.mineCountTextbox).disabled = false;
+  }
 }
