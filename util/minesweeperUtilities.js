@@ -40,7 +40,10 @@ export function createDefaultTileImage(mineField, x, y)
 
       toggleFlagTile(mineField, x, y);
 
-      updateStatusBarRemainingMines(mineField);
+      if (!mineField.gameOver)
+      {
+        updateStatusBarRemainingMines(mineField);
+      }
 
       redrawMineField(mineField);
     }, false);
@@ -67,8 +70,6 @@ export function setMineField(mineField, width, height, mineCount)
 export function resetAndRedrawMineField(mineField)
 {
   resetMineField(mineField);
-
-  document.getElementById(Ids.gameScreen.statusBar.timerLabel).innerHTML = "0.00";
 
   updateStatusBarRemainingMines(mineField);
 
@@ -172,6 +173,11 @@ export function fillMines(mineField, x, y)
 
   for (let i = 0; i < mineField.mineCount; i++)
   {
+    if (availableTilesToSetMine <= 0)
+    {
+      console.error('Cannot fill mines when availableTilesToSetMine is less than or equal to 0. Check that the mineCount is within the range of the width/height of the mine field.');
+      break;
+    }
     let randomNumber = utilities.generateRandomInteger(0, availableTilesToSetMine.length - 1);
     let tileToSetMineCoordinate = availableTilesToSetMine.splice(randomNumber, 1)[0];
     tileToSetMineCoordinate =

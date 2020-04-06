@@ -114,19 +114,25 @@ export function setupUIEventListeners(mineField)
       let height = document.getElementById(Ids.setupScreen.heightTextbox).valueAsNumber;
       let mineCount = document.getElementById(Ids.setupScreen.mineCountTextbox).valueAsNumber;
       
+      // Check that the mineCount is within the range of the width/height of the mine field
+      let maximumMineCount = width * height - 9;
+      if (mineCount > maximumMineCount)
+      {
+        alert('Mine count is too high. Mine count should be less than or equal to ' + maximumMineCount);
+        return;
+      }
+
       let difficultySelected = document.querySelector('input[name="difficulty"]:checked').value;
 
       document.getElementById(Ids.gameScreen.statusBar.infoLabel).innerHTML = `${difficultySelected}: ${width} <i class="fa fa-arrows-alt-h"></i> , ${height} <i class="fa fa-arrows-alt-v"></i> , ${mineCount} <img src="images/${TileState.MINE}.png" width="20" height="20">`;
 
-      // TODO: Check that mineCount is within width/height
-
       document.getElementById(Ids.setupScreen.id).hidden = true;
       document.getElementById(Ids.gameScreen.id).hidden = false;
+
+      document.getElementById(Ids.gameScreen.statusBar.timerLabel).innerHTML = "0.00";
       
       minesweeperUtilities.setMineField(mineField, width, height, mineCount);
       minesweeperUtilities.resetAndRedrawMineField(mineField);
-
-      // TODO: Reset UI
     });
   
   document.getElementById(Ids.gameScreen.statusBar.resetButton).addEventListener('click',
@@ -136,9 +142,9 @@ export function setupUIEventListeners(mineField)
       let height = document.getElementById(Ids.setupScreen.heightTextbox).valueAsNumber;
       let mineCount = document.getElementById(Ids.setupScreen.mineCountTextbox).valueAsNumber;
       
+      document.getElementById(Ids.gameScreen.statusBar.timerLabel).innerHTML = "0.00";
+      
       minesweeperUtilities.setMineField(mineField, width, height, mineCount);
       minesweeperUtilities.resetAndRedrawMineField(mineField);
-      
-      // TODO: Reset UI
     });
 }
