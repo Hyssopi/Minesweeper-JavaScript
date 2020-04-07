@@ -263,11 +263,11 @@ export function updateStatusBarRemainingMines(mineField)
 }
 
 /**
- * Reset the mine field data and draw the mine field UI.
+ * Reset the mine field data and initialize/draw the mine field UI.
  * 
  * @param mineField Contains mine field data
  */
-export function resetAndRedrawMineField(mineField)
+export function resetAndDrawMineField(mineField)
 {
   resetMineField(mineField);
 
@@ -570,20 +570,20 @@ export function gameOver(mineField)
   {
     for (let x = 0; x < mineField.width; x++)
     {
-      if (isGridClearedTemp && mineField.grid[y][x].isMine)
+      if (mineField.grid[y][x].state === TileState.FLAGGED && !mineField.grid[y][x].isMine)
       {
-        mineField.grid[y][x].state = TileState.FLAGGED;
-      }
-      else if (mineField.grid[y][x].state === TileState.FLAGGED)
-      {
-        if (!mineField.grid[y][x].isMine)
-        {
-          mineField.grid[y][x].state = TileState.WRONG_MINE;
-        }
+        mineField.grid[y][x].state = TileState.WRONG_MINE;
       }
       else if (mineField.grid[y][x].isMine)
       {
-        mineField.grid[y][x].state = TileState.MINE;
+        if (isGridClearedTemp)
+        {
+          mineField.grid[y][x].state = TileState.FLAGGED;
+        }
+        else
+        {
+          mineField.grid[y][x].state = TileState.MINE;
+        }
       }
     }
   }

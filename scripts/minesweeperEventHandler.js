@@ -110,7 +110,7 @@ export function setupUIEventListeners(mineField)
       document.getElementById(Ids.gameScreen.id).hidden = false;
       
       minesweeperUtilities.setMineField(mineField, width, height, mineCount);
-      minesweeperUtilities.resetAndRedrawMineField(mineField);
+      minesweeperUtilities.resetAndDrawMineField(mineField);
     });
   
   document.getElementById(Ids.gameScreen.statusBar.resetButton).addEventListener('click',
@@ -123,7 +123,7 @@ export function setupUIEventListeners(mineField)
       document.getElementById(Ids.gameScreen.statusBar.timerLabel).innerHTML = "0.00";
       
       minesweeperUtilities.setMineField(mineField, width, height, mineCount);
-      minesweeperUtilities.resetAndRedrawMineField(mineField);
+      minesweeperUtilities.resetAndDrawMineField(mineField);
     });
 }
 
