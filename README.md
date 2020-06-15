@@ -1,4 +1,4 @@
-# Minesweeper-JavaScript
+# Minesweeper JavaScript
 Standard Minesweeper game.
 
 ![splash](images/splash.png)
