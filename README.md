@@ -3,7 +3,10 @@ Standard Minesweeper game.
 
 ![splash](images/splash.png)
 
-## GitHub Pages
+## Working Demo
+https://www.youtube.com/watch?v=gelckmTZjKE
+
+## Try It Out
 https://hyssopi.github.io/Minesweeper-JavaScript
 
 ## Prerequisites
